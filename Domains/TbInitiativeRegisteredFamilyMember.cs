@@ -26,5 +26,10 @@ namespace Domains
         public DateTime? UpdatedDate { get; set; }
         public string Notes { get; set; }
         public int? CurrentState { get; set; }
+
+
+        public Guid InitiativeRegisteredUserId { get; set; }
+
+        
     }
 }

@@ -23,9 +23,9 @@ namespace BL
         public virtual DbSet<TbInitiativeTerm> TbInitiativeTerms { get; set; }
         public virtual DbSet<TbNormalUser> TbNormalUsers { get; set; }
         public virtual DbSet<TbSlider> TbSliders { get; set; }
+        public virtual DbSet<VwRegisteredUser> VwRegisteredUsers { get; set; }
 
-       
-
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");

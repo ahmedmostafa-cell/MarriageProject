@@ -1,4 +1,5 @@
 using BL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +27,11 @@ namespace MarriageProject
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddScoped<InitiativeRegisteredFamilyMemberService, ClsInitiativeRegisteredFamilyMember>();
+            services.AddScoped<InitiativeTermService, ClsInitiativeTerm>();
+            services.AddScoped<NormalUserService, ClsNormalUser>();
+            services.AddScoped<SliderService, ClsSlider>();
+            services.AddScoped<InitiativeRegisteredUserService, ClsTbInitiativeRegisteredUser>();
             services.AddDbContext<MarriagedDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
@@ -51,6 +57,11 @@ namespace MarriageProject
 
             app.UseEndpoints(endpoints =>
             {
+
+                endpoints.MapControllerRoute(
+
+               name: "areas",
+               pattern: "{area:exists}/{controller=Home}/{action=Index}");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
