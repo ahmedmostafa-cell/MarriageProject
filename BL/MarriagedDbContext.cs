@@ -77,6 +77,16 @@ namespace BL
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
             });
 
+
+            modelBuilder.Entity<VwRegisteredUser>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VwRegisteredUser");
+
+
+            });
+
             modelBuilder.Entity<TbInitiativeRegisteredUser>(entity =>
             {
                 entity.HasKey(e => e.InitiativeRegisteredUserId);

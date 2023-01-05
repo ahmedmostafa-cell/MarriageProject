@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace BL
 {
@@ -13,6 +14,8 @@ namespace BL
         bool Add(TbNormalUser client);
         bool Edit(TbNormalUser client);
         bool Delete(TbNormalUser client);
+
+        Task<bool> AddAsync(TbNormalUser client);
 
 
     }
@@ -30,6 +33,25 @@ namespace BL
             List<TbNormalUser> lstNormalUsers = ctx.TbNormalUsers.ToList();
 
             return lstNormalUsers;
+        }
+
+
+        public async Task<bool> AddAsync(TbNormalUser client)
+        {
+            try
+            {
+                //_4ZsoftwareCompanyTestTaskContext o_4ZsoftwareCompanyTestTaskContext = new _4ZsoftwareCompanyTestTaskContext();
+                client.CurrentState = 1;
+                await ctx.TbNormalUsers.AddAsync(client);
+                await ctx.SaveChangesAsync();
+
+                return  true;
+            }
+            catch (Exception ex)
+            {
+              
+                return false;
+            }
         }
 
         public bool Add(TbNormalUser item)
@@ -82,5 +104,7 @@ namespace BL
 
             }
         }
+
+      
     }
 }

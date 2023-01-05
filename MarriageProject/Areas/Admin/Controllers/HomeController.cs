@@ -9,16 +9,20 @@ namespace MarriageProject.Areas.Admin.Controllers
     {
         InitiativeRegisteredFamilyMemberService initiativeRegisteredFamilyMemberService;
         MarriagedDbContext ctx;
-
-        public HomeController(InitiativeRegisteredFamilyMemberService InitiativeRegisteredFamilyMemberService, MarriagedDbContext context)
+        NormalUserService normalUserService;
+        InitiativeRegisteredUserService initiativeRegisteredUserService;
+        public HomeController(InitiativeRegisteredUserService  InitiativeRegisteredUserService,NormalUserService NormalUserService,InitiativeRegisteredFamilyMemberService InitiativeRegisteredFamilyMemberService, MarriagedDbContext context)
         {
-
+            normalUserService = NormalUserService;
             ctx = context;
             initiativeRegisteredFamilyMemberService = InitiativeRegisteredFamilyMemberService;
-
+            initiativeRegisteredUserService = InitiativeRegisteredUserService;
         }
         public IActionResult Index()
         {
+            ViewBag.NormalUsers = normalUserService.getAll().Count;
+            ViewBag.InitiativeRegisteredUser = initiativeRegisteredUserService.getAll().Count;
+            ViewBag.InitiativeRegisteredFamilyMember = initiativeRegisteredFamilyMemberService.getAll().Count;
             return View();
         }
         public IActionResult RegiteredUserwithMembers()

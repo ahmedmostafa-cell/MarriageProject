@@ -1,4 +1,5 @@
 using BL;
+using MarriageProject.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,6 +33,7 @@ namespace MarriageProject
             services.AddScoped<NormalUserService, ClsNormalUser>();
             services.AddScoped<SliderService, ClsSlider>();
             services.AddScoped<InitiativeRegisteredUserService, ClsTbInitiativeRegisteredUser>();
+            services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddDbContext<MarriagedDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
