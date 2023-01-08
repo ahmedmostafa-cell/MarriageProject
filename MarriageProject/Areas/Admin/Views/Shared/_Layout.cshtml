@@ -37,6 +37,12 @@
     <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css">
     <!-- Custom style for RTL -->
     <link rel="stylesheet" href="~/Admin/dist/css/custom.css">
+   <style>
+               table {
+            table-layout: fixed;
+            word-wrap: break-word;
+        }
+   </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -82,6 +88,18 @@
                                     <a asp-area="Admin" asp-controller="NormalUser" asp-action="Index" class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>بيانات المستخدمين العاديين</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="Admin" asp-controller="Slider" asp-action="Index" class="nav-link active">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p> عرض السليدر</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="Admin" asp-controller="Slider" asp-action="Form" class="nav-link active">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>اضافة او تعديل <br /> او حذف للسليدر</p>
                                     </a>
                                 </li>
                                
