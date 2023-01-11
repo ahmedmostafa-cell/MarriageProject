@@ -12,7 +12,9 @@ namespace MarriageProject.Models
     }
     public class InitiativeRegisteredViewPageModel
     {
-      
+
+        public string Id { get; set; }
+
         public string InitiativeRegisteredUserName { get; set; }
         public string InitiativeRegisteredUserFamilyName { get; set; }
        

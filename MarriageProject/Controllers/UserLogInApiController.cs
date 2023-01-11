@@ -1,6 +1,9 @@
-﻿using MarriageProject.Models;
+﻿using BL;
+using MarriageProject.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -11,10 +14,12 @@ namespace MarriageProject.Controllers
     [ApiController]
     public class UserLogInApiController : ControllerBase
     {
+        UserManager<ApplicationUser> Usermanager;
         private readonly IAccountRepository _accountRepository;
-        public UserLogInApiController(IAccountRepository accountRepository)
+        public UserLogInApiController(UserManager<ApplicationUser> usermanager, IAccountRepository accountRepository)
         {
             _accountRepository = accountRepository;
+            Usermanager = usermanager;
         }
 
         [HttpPost("signup")]
@@ -22,12 +27,18 @@ namespace MarriageProject.Controllers
         {
             var result = await _accountRepository.SSignUpAsync(signUpModel);
 
-            if (result == null)
+            if (result != "Succeeded")
             {
-                return BadRequest("The Data is not saved");
+                return BadRequest(result);
 
             }
-            return Ok("the data is saved");
+            else
+            {
+                ApplicationUser user = await Usermanager.FindByEmailAsync(signUpModel.Email);
+
+                return Ok(user);
+
+            }
 
         }
 
@@ -37,12 +48,19 @@ namespace MarriageProject.Controllers
         {
             var result = await _accountRepository.LLoginAsync(signInModel);
 
-            if (result == null)
+            if (result == "Failed")
             {
-                return Unauthorized();
+                return BadRequest(result);
             }
+            else 
+            {
+                ApplicationUser user = await Usermanager.FindByEmailAsync(signInModel.Email);
 
-            return Ok(result);
+                return Ok(user);
+
+            } 
+
+           
         }
         // GET: api/<UserLogInApiController>
         [HttpGet]
@@ -53,9 +71,9 @@ namespace MarriageProject.Controllers
 
         // GET api/<UserLogInApiController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ApplicationUser Get(string id)
         {
-            return "value";
+            return Usermanager.Users.Where(a => a.Id == id).FirstOrDefault();
         }
 
         // POST api/<UserLogInApiController>

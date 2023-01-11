@@ -65,7 +65,45 @@ namespace MarriageProject.Controllers
 
 
 
-        public async Task<ApplicationUser> SSignUpAsync(SignUpModel signUpModel)
+        [HttpPost]
+        public async Task<string> EditUsersImage2(EditUserViewModell model)
+        {
+            if (model.PersonalImage != null)
+            {
+                string ImageName = Guid.NewGuid().ToString() + ".jpg";
+                var filePaths = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\Uploads", ImageName);
+                using (var stream = System.IO.File.Create(filePaths))
+                {
+                    await model.PersonalImage.CopyToAsync(stream);
+                }
+                model.NormalUserImage = ImageName;
+            }
+            var user = await Usermanager.FindByIdAsync(model.Id);
+            TbNormalUser oTbNormalUser = new TbNormalUser();
+            user.Name = model.NormalUserName;
+            user.FamilyName = model.NormalUserFamilyName;
+            user.Age = model.NormalUserAge;
+            user.PhoneNumber = model.NormalUserPhoneNo;
+            user.Certificate = model.NormalUserCertificate;
+            user.MaritalStatus = model.NormalUserMaritalStatus;
+            user.ImageProfile = model.NormalUserImage;
+            user.Status = "Normal User";
+            var result = await Usermanager.UpdateAsync(user);
+
+
+
+
+
+
+            return result.ToString();
+
+
+
+        }
+
+
+
+        public async Task<string> SSignUpAsync(SignUpModel signUpModel)
         {
 
             if (signUpModel.PersonalImage != null)
@@ -98,30 +136,59 @@ namespace MarriageProject.Controllers
 
 
             var r =  await Usermanager.CreateAsync(user, signUpModel.Password);
-            var res2 = Usermanager.Users.Where(a => a.Id == user.Id).FirstOrDefault();
-            return res2;
+           
+            return r.ToString();
         }
 
 
 
-        public async Task<ApplicationUser> LLoginAsync(SignInModel signInModel)
+        public async Task<string> LLoginAsync(SignInModel signInModel)
         {
             var result = await SignInManager.PasswordSignInAsync(signInModel.Email, signInModel.Password, true, true);
-
-            if (!result.Succeeded)
-            {
-                return null;
-            }
-            else
-            {
+         
                
+                return result.ToString();
+           
 
-                var res2 = Usermanager.Users.Where(a => a.UserName == signInModel.Email).FirstOrDefault();
-
-                return res2;
-            }
+               
+           
 
            
+        }
+
+
+
+
+        [HttpPost]
+        public async Task<string> EditUsers(InitiativeRegisteredViewPageModel model)
+        {
+
+          
+            var user = await Usermanager.FindByIdAsync(model.Id);
+
+            user.Name = model.InitiativeRegisteredUserName;
+            user.FamilyName = model.InitiativeRegisteredUserFamilyName;
+            user.Age = model.InitiativeRegisteredUserAge;
+            user.PhoneNumber = model.InitiativeRegisteredUserPhoneNo;
+
+            user.Status = "Initiative Registered User";
+
+
+
+
+
+
+            var result = await Usermanager.UpdateAsync(user);
+
+
+
+
+          
+
+            return result.ToString();
+
+
+
         }
     }
 }

@@ -10,8 +10,13 @@ namespace MarriageProject.Controllers
     {
         Task<TbNormalUser>  EditUsersImage(EditUserViewModell editModel);
 
-        Task<ApplicationUser> SSignUpAsync(SignUpModel signUpModel);
+        Task<string> EditUsersImage2(EditUserViewModell editModel);
 
-        Task<ApplicationUser> LLoginAsync(SignInModel signInModel);
+        Task<string> SSignUpAsync(SignUpModel signUpModel);
+
+        Task<string> LLoginAsync(SignInModel signInModel);
+
+
+        Task<string> EditUsers(InitiativeRegisteredViewPageModel editModel);
     }
 }

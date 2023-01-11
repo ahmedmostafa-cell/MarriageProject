@@ -15,5 +15,8 @@ namespace MarriageProject.Models
 
 
         public IEnumerable<VwRegisteredUser> lVwRegisteredUser { get; set; }
+
+
+        public IEnumerable<VwRegisteredUser2> lVwRegisteredUser2 { get; set; }
     }
 }

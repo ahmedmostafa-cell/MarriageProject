@@ -4,6 +4,8 @@ namespace MarriageProject.Models
 {
     public class EditUserViewModell
     {
+
+        public string Id { get; set; }
         public string NormalUserName { get; set; }
         public string NormalUserFamilyName { get; set; }
       

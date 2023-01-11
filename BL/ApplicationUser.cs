@@ -11,6 +11,7 @@ namespace BL
 {
     public class ApplicationUser:IdentityUser
     {
+        public string? Status { get; set; }
         public string? ImageProfile { get; set; }
 
         public string? Name { get; set; }

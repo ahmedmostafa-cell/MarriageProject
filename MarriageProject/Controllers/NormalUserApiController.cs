@@ -1,4 +1,6 @@
-﻿using MarriageProject.Models;
+﻿using BL;
+using MarriageProject.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,10 +13,12 @@ namespace MarriageProject.Controllers
     [ApiController]
     public class NormalUserApiController : ControllerBase
     {
+        UserManager<ApplicationUser> Usermanager;
         private readonly IAccountRepository _accountRepository;
-        public NormalUserApiController(IAccountRepository accountRepository)
+        public NormalUserApiController(UserManager<ApplicationUser> usermanager, IAccountRepository accountRepository)
         {
             _accountRepository = accountRepository;
+            Usermanager = usermanager;
         }
         // GET: api/<NormalUserApiController>
         [HttpGet]
@@ -42,6 +46,27 @@ namespace MarriageProject.Controllers
 
             }
             return Ok("the data is saved");
+
+        }
+
+
+
+        [HttpPost("registeruser2")]
+        public async Task<IActionResult> editImage2([FromForm] EditUserViewModell editModel)
+        {
+            var result = await _accountRepository.EditUsersImage2(editModel);
+
+            if (result != "Succeeded")
+            {
+                return BadRequest(result);
+
+            }
+            else 
+            {
+                ApplicationUser user = await Usermanager.FindByIdAsync(editModel.Id);
+                return Ok(user);
+            }
+          
 
         }
 

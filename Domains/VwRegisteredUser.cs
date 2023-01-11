@@ -11,17 +11,21 @@ namespace Domains
 
        
 
-        public string InitiativeRegisteredUserName { get; set; }
+        public string? InitiativeRegisteredUserName { get; set; }
 
-        public string InitiativeRegisteredUserFamilyName { get; set; }
+        public string? InitiativeRegisteredUserFamilyName { get; set; }
 
-        public string InitiativeRegisteredUserPhoneNo { get; set; }
+        public string? InitiativeRegisteredUserPhoneNo { get; set; }
 
 
-        public string InitiativeRegisteredUserAge { get; set; }
+        public string? InitiativeRegisteredUserAge { get; set; }
 
-        public string InitiativeRegisteredFamilyMemberName { get; set; }
+        public string? InitiativeRegisteredFamilyMemberName { get; set; }
 
-        public string InitiativeRegisteredFamilyMemberBirthDate { get; set; }
+        public string? InitiativeRegisteredFamilyMemberBirthDate { get; set; }
+
+
+        //public string? InitiativeRegisteredUserId { get; set; }
+        
     }
 }

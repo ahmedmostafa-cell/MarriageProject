@@ -40,16 +40,16 @@
                 </tr>
                 </thead>
                 <tbody>
-                    @foreach(var item in Model.lVwRegisteredUser) 
+                    @foreach(var item in Model.lVwRegisteredUser2) 
                     {
 
                                 <tr>
-                                    <td>@item.InitiativeRegisteredUserName</td>
+                                    <td>@item.Name</td>
                                     <td>
-                                       @item.InitiativeRegisteredUserFamilyName
+                                       @item.FamilyName
                                     </td>
-                                    <td>@item.InitiativeRegisteredUserPhoneNo</td>
-                                    <td> @item.InitiativeRegisteredUserAge</td>
+                                    <td>@item.PhoneNumber</td>
+                                    <td> @item.Age</td>
                                     <td>@item.InitiativeRegisteredFamilyMemberName</td>
                                     <td>@item.InitiativeRegisteredFamilyMemberBirthDate</td>
                                 </tr>

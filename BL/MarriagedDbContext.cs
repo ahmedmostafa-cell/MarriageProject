@@ -26,7 +26,9 @@ namespace BL
         public virtual DbSet<TbSlider> TbSliders { get; set; }
         public virtual DbSet<VwRegisteredUser> VwRegisteredUsers { get; set; }
 
-        
+        public virtual DbSet<VwRegisteredUser2> VwRegisteredUsers2 { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -85,6 +87,14 @@ namespace BL
                 entity.HasNoKey();
 
                 entity.ToView("VwRegisteredUser");
+
+
+            });
+            modelBuilder.Entity<VwRegisteredUser2>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VwRegisteredUser2");
 
 
             });
