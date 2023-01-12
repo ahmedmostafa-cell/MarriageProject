@@ -35,9 +35,14 @@ namespace MarriageProject.Areas.Admin.Controllers
             model.lVwRegisteredUser2 = ctx.VwRegisteredUsers2;
             return View(model);
         }
-
-
+        public IActionResult ComplainsAndSuggestion()
+        {
+            HomePageModel model = new HomePageModel();
+            model.lstComplainsAndSuggestions = ctx.TbComplainsAndSuggestions.ToList();
+            return View(model);
+        }
 
         
+
     }
 }

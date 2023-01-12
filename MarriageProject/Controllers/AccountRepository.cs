@@ -124,9 +124,9 @@ namespace MarriageProject.Controllers
 
             var user = new ApplicationUser()
             {
-                Email = signUpModel.Email,
+                //Email = "ahmedmostafa706@gmail.com",
                 UserName = signUpModel.UserName,
-                EmailConfirmed = true
+               
 
 
 
@@ -144,7 +144,7 @@ namespace MarriageProject.Controllers
 
         public async Task<string> LLoginAsync(SignInModel signInModel)
         {
-            var result = await SignInManager.PasswordSignInAsync(signInModel.Email, signInModel.Password, true, true);
+            var result = await SignInManager.PasswordSignInAsync(signInModel.UserName, signInModel.Password, true, true);
          
                
                 return result.ToString();

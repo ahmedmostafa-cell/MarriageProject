@@ -34,7 +34,7 @@ namespace MarriageProject.Controllers
             }
             else
             {
-                ApplicationUser user = await Usermanager.FindByEmailAsync(signUpModel.Email);
+                ApplicationUser user = await Usermanager.FindByNameAsync(signUpModel.UserName);
 
                 return Ok(user);
 
@@ -54,7 +54,7 @@ namespace MarriageProject.Controllers
             }
             else 
             {
-                ApplicationUser user = await Usermanager.FindByEmailAsync(signInModel.Email);
+                ApplicationUser user = await Usermanager.FindByNameAsync(signInModel.UserName);
 
                 return Ok(user);
 

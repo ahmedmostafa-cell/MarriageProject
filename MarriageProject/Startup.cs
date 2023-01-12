@@ -45,12 +45,15 @@ namespace MarriageProject
                 options.Password.RequireLowercase = true;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
-                options.User.RequireUniqueEmail = true;
+                options.User.RequireUniqueEmail = false;
+                options.SignIn.RequireConfirmedEmail = false;
+                options.User.AllowedUserNameCharacters = "";
                 options.Password.RequireDigit = false;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromSeconds(30);
                 options.Lockout.MaxFailedAccessAttempts = 5;
-                options.SignIn.RequireConfirmedEmail = true;
+                
                 options.User.AllowedUserNameCharacters = string.Empty;
+                //options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
 
             }).AddErrorDescriber<CustomIdentityErrorDescriber>().AddEntityFrameworkStores<MarriagedDbContext>().AddDefaultTokenProviders();    ///.AddDefaultUI();
 

@@ -28,11 +28,44 @@ namespace BL
 
         public virtual DbSet<VwRegisteredUser2> VwRegisteredUsers2 { get; set; }
 
+        public virtual DbSet<TbComplainsAndSuggestion> TbComplainsAndSuggestions { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+
+            modelBuilder.Entity<TbComplainsAndSuggestion>(entity =>
+            {
+                entity.HasKey(e => e.ComplaintsAndSuggestionsId);
+
+                entity.ToTable("TbComplainsAndSuggestion");
+
+                entity.Property(e => e.ComplaintsAndSuggestionsId).HasDefaultValueSql("(newid())");
+
+                entity.Property(e => e.ComplaintsAndSuggestionsText).HasMaxLength(200);
+
+                entity.Property(e => e.CreatedBy).HasMaxLength(200);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.CurrentState).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.Email).HasMaxLength(200);
+
+                entity.Property(e => e.Id).HasMaxLength(200);
+
+                entity.Property(e => e.Name).HasMaxLength(200);
+
+                entity.Property(e => e.Notes).HasMaxLength(200);
+
+                entity.Property(e => e.UpdatedBy).HasMaxLength(200);
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
 
             modelBuilder.Entity<TbInitiativeRegisteredFamilyMember>(entity =>
             {

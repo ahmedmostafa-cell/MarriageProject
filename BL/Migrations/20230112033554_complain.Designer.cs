@@ -4,14 +4,16 @@ using BL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BL.Migrations
 {
     [DbContext(typeof(MarriagedDbContext))]
-    partial class MarriagedDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230112033554_complain")]
+    partial class complain
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
